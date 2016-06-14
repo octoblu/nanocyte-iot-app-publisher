@@ -12,7 +12,6 @@ class IotAppPublisher
       @userUuid
       @userToken
       @octobluUrl
-      @client
       meshbluConfig
     } = options
     {
@@ -25,8 +24,6 @@ class IotAppPublisher
     meshbluConfig = new MeshbluConfig
     meshbluJSON = _.assign meshbluConfig.toJSON(), uuid: @flowUuid, token: @flowToken
     @meshbluHttp = new MeshbluHttp meshbluJSON
-
-    throw new Error 'IotAppPublisher requires client' unless @client?
 
   publish: (callback=->) =>
     @getFlowDevice (error, flowDevice) =>
