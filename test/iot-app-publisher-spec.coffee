@@ -1,12 +1,8 @@
 _ = require 'lodash'
-Redis = require 'ioredis'
 IotAppPublisher = require '../src/iot-app-publisher'
 
 describe 'IotAppPublisher', ->
   describe 'when constructed with a flow', ->
-    beforeEach (done) ->
-      @client = new Redis dropBufferSupport: true
-      @client.on 'ready', done
 
     beforeEach ->
       @configuration = erik_is_happy: true

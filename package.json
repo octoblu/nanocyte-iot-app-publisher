@@ -1,13 +1,12 @@
 {
   "name": "nanocyte-iot-app-publisher",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "[![Build Status](https://travis-ci.org/octoblu/.svg?branch=master)](https://travis-ci.org/octoblu/) [![Code Climate](https://codeclimate.com/github/octoblu//badges/gpa.svg)](https://codeclimate.com/github/octoblu/) [![Test Coverage](https://codeclimate.com/github/octoblu//badges/coverage.svg)](https://codeclimate.com/github/octoblu/) [![npm version](https://badge.fury.io/js/.svg)](http://badge.fury.io/js/) [![Gitter](https://badges.gitter.im/octoblu/help.svg)](https://gitter.im/octoblu/help)",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "dependencies": {
-    "ioredis": "^2.0.1",
     "meshblu-config": "^4.0.0",
     "meshblu-http": "^5.5.0"
   },
