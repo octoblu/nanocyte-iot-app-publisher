@@ -22,9 +22,6 @@ options =
   appId: meshbluJSON.uuid
   appToken: meshbluJSON.token
   version: '1.0.0'
-  userUuid: "ab1eb89d-3899-4276-bd31-7c89371105ed"
-  userToken: "1b9aa7ddf649cae48f2e6c8c0120a38d53573be9"
-  octobluUrl: "http://app.octoblu.dev"
   meshbluConfig: new MeshbluConfig meshbluJSON
 
 class VatChannelConfig

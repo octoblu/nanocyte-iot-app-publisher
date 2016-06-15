@@ -11,9 +11,6 @@ describe 'IotAppPublisher', ->
         appId: 'the-flow-uuid'
         appToken: 'the-flow-token'
         version: 'some-version'
-        userUuid: 'some-user-uuid'
-        userToken: 'some-user-token'
-        octobluUrl: 'https://api.octoblu.com'
         client: @client
 
       @configurationGenerator =

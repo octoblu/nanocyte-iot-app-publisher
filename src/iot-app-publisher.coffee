@@ -9,9 +9,6 @@ class IotAppPublisher
       @appId
       @appToken
       @version
-      @userUuid
-      @userToken
-      @octobluUrl
       meshbluConfig
     } = options
     {
