@@ -1,5 +1,5 @@
 _ = require 'lodash'
-IotAppPublisher = require '../src/iot-app-publisher'
+IotAppPublisher = require '..'
 
 describe 'IotAppPublisher', ->
   describe 'when constructed with a flow', ->

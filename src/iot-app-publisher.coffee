@@ -20,10 +20,11 @@ class IotAppPublisher
       MeshbluHttp
     } = dependencies
 
-    MeshbluHttp ?= require 'meshblu-http'
-    meshbluConfig = new MeshbluConfig
-    meshbluJSON = _.assign meshbluConfig.toJSON(), uuid: @flowUuid, token: @flowToken
-    @meshbluHttp = new MeshbluHttp meshbluJSON
+    MeshbluHttp   ?= require 'meshblu-http'
+    meshbluConfig ?= new MeshbluConfig
+    meshbluJSON   = _.assign meshbluConfig.toJSON(), uuid: @flowUuid, token: @flowToken
+    console.log JSON.stringify meshbluJSON, null, 2
+    @meshbluHttp  = new MeshbluHttp meshbluJSON
 
   publish: (callback=->) =>
     @getFlowDevice (error, flowDevice) =>
