@@ -12,15 +12,6 @@ db                     = mongojs 'localhost/iot-app-publisher-test', ['versions'
 datastore              = new Datastore database: db, collection: 'instances'
 client                 = new Redis dropBufferSupport: true
 
-options =
-  flowUuid: 'the-flow-uuid'
-  flowToken: 'the-flow-token'
-  version: 'some-version'
-  userUuid: 'some-user-uuid'
-  userToken: 'some-user-token'
-  octobluUrl: 'https://api.octoblu.com'
-  client: @client
-
 meshbluJSON =
   uuid:  '36b038b3-b36e-4fff-b728-9ebbe87dce31'
   token: '578ee84a8c8ae5278e0f8a23582fbcebbe7db8cf'
@@ -28,8 +19,8 @@ meshbluJSON =
   port: '80'
 
 options =
-  flowUuid: meshbluJSON.uuid
-  flowToken: meshbluJSON.token
+  appId: meshbluJSON.uuid
+  appToken: meshbluJSON.token
   version: '1.0.0'
   userUuid: "ab1eb89d-3899-4276-bd31-7c89371105ed"
   userToken: "1b9aa7ddf649cae48f2e6c8c0120a38d53573be9"

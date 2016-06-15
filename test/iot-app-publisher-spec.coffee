@@ -8,8 +8,8 @@ describe 'IotAppPublisher', ->
       @configuration = erik_is_happy: true
 
       options =
-        flowUuid: 'the-flow-uuid'
-        flowToken: 'the-flow-token'
+        appId: 'the-flow-uuid'
+        appToken: 'the-flow-token'
         version: 'some-version'
         userUuid: 'some-user-uuid'
         userToken: 'some-user-token'
@@ -53,11 +53,11 @@ describe 'IotAppPublisher', ->
       it 'should call configuration generator with the flow', ->
         expect(@configurationGenerator.configure).to.have.been.calledWith
           flowData: { a: 1, b: 5 }
-          flowToken: 'the-flow-token'
+          appToken: 'the-flow-token'
 
       it 'should call configuration saver with the flow', ->
         expect(@configurationSaver.saveIotApp).to.have.been.calledWith(
-          flowId: 'the-flow-uuid'
+          appId: 'the-flow-uuid'
           version: 'some-version'
           flowData:
             'some': 'thing'

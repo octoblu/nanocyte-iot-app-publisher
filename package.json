@@ -1,6 +1,6 @@
 {
   "name": "nanocyte-iot-app-publisher",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "[![Build Status](https://travis-ci.org/octoblu/.svg?branch=master)](https://travis-ci.org/octoblu/) [![Code Climate](https://codeclimate.com/github/octoblu//badges/gpa.svg)](https://codeclimate.com/github/octoblu/) [![Test Coverage](https://codeclimate.com/github/octoblu//badges/coverage.svg)](https://codeclimate.com/github/octoblu/) [![npm version](https://badge.fury.io/js/.svg)](http://badge.fury.io/js/) [![Gitter](https://badges.gitter.im/octoblu/help.svg)](https://gitter.im/octoblu/help)",
   "main": "index.js",
   "directories": {
@@ -14,9 +14,16 @@
     "chai": "^3.5.0",
     "coffee-coverage": "^1.0.1",
     "coffee-script": "^1.10.0",
+    "ioredis": "^2.0.1",
     "istanbul": "^0.4.3",
+    "meshblu-config": "^4.0.0",
+    "meshblu-core-datastore": "^4.6.0",
+    "meshblu-http": "^5.5.0",
     "mocha": "^2.5.3",
     "mocha-istanbul": "^0.2.0",
+    "mongojs": "^2.4.0",
+    "nanocyte-configuration-generator": "^5.0.0",
+    "nanocyte-configuration-saver-redis": "^3.3.0",
     "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0"
   },

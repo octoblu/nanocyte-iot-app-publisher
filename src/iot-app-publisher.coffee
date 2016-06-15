@@ -6,9 +6,9 @@ MeshbluConfig = require 'meshblu-config'
 class IotAppPublisher
   constructor: (options, dependencies={}) ->
     {
-      @flowUuid
+      @appId
+      @appToken
       @version
-      @flowToken
       @userUuid
       @userToken
       @octobluUrl
@@ -22,15 +22,14 @@ class IotAppPublisher
 
     MeshbluHttp   ?= require 'meshblu-http'
     meshbluConfig ?= new MeshbluConfig
-    meshbluJSON   = _.assign meshbluConfig.toJSON(), uuid: @flowUuid, token: @flowToken
-    console.log JSON.stringify meshbluJSON, null, 2
+    meshbluJSON   = _.assign meshbluConfig.toJSON(), uuid: @appId, token: @appToken
     @meshbluHttp  = new MeshbluHttp meshbluJSON
 
   publish: (callback=->) =>
     @getFlowDevice (error, flowDevice) =>
       return callback error if error?
       flowData = flowDevice.flow
-      @configurationGenerator.configure {flowData, @flowToken}, (error, config, stopConfig) =>
+      @configurationGenerator.configure {flowData, @appToken}, (error, config, stopConfig) =>
         return callback error if error?
 
         @clearAndSaveConfig {config, stopConfig}, (error) =>
@@ -44,7 +43,7 @@ class IotAppPublisher
     {config, stopConfig} = options
 
     saveOptions =
-      flowId: @flowUuid
+      appId: @appId
       version: @version
       flowData: config
 
@@ -52,7 +51,7 @@ class IotAppPublisher
 
   getFlowDevice: (callback) =>
 
-    query = uuid: @flowUuid
+    query = uuid: @appId
 
     projection = uuid: true, flow: true
 
@@ -116,6 +115,6 @@ class IotAppPublisher
               default: messageSchema
 
 
-    @meshbluHttp.updateDangerously @flowUuid, setMessageSchema, callback
+    @meshbluHttp.updateDangerously @appId, setMessageSchema, callback
 
 module.exports = IotAppPublisher
