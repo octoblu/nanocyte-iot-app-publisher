@@ -32,7 +32,7 @@ describe 'IotAppPublisher', ->
         configurationSaver: @configurationSaver
         MeshbluHttp: MeshbluHttp
 
-      @meshbluHttp.search.yields null, [flow: { a: 1, b: 5 }]
+      @meshbluHttp.search.yields null, [draft: { a: 1, b: 5 }]
 
     describe 'when publish is called', ->
       beforeEach (done)->

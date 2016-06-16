@@ -25,7 +25,7 @@ class IotAppPublisher
   publish: (callback=->) =>
     @getFlowDevice (error, flowDevice) =>
       return callback error if error?
-      flowData = flowDevice.flow
+      flowData = flowDevice.draft
       @configurationGenerator.configure {flowData, @appToken}, (error, config, stopConfig) =>
         return callback error if error?
 
@@ -59,7 +59,7 @@ class IotAppPublisher
         error = new Error 'Device Not Found'
         error.code = 404
         return callback error
-      unless flowDevice?.flow
+      unless flowDevice?.draft
         error = new Error 'Device is missing flow property'
         error.code = 400
         return callback error
