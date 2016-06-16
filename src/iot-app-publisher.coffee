@@ -50,7 +50,7 @@ class IotAppPublisher
 
     query = uuid: @appId
 
-    projection = uuid: true, flow: true
+    projection = uuid: true, draft: true
 
     @meshbluHttp.search query, {projection}, (error, devices) =>
       return callback error if error?
