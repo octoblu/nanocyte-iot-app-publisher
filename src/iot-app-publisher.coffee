@@ -7,7 +7,8 @@ class IotAppPublisher
   constructor: (options, dependencies={}) ->
     {
       @appId
-      @appToken
+      @flowId
+      @flowToken
       @version
       meshbluConfig
     } = options
@@ -19,14 +20,14 @@ class IotAppPublisher
 
     MeshbluHttp   ?= require 'meshblu-http'
     meshbluConfig ?= new MeshbluConfig
-    meshbluJSON   = _.assign meshbluConfig.toJSON(), uuid: @appId, token: @appToken
+    meshbluJSON   = _.assign meshbluConfig.toJSON(), uuid: @flowId, token: @flowToken
     @meshbluHttp  = new MeshbluHttp meshbluJSON
 
   publish: (callback=->) =>
     @getFlowDevice (error, flowDevice) =>
       return callback error if error?
       flowData = flowDevice.draft
-      @configurationGenerator.configure {flowData, @appToken}, (error, config, stopConfig) =>
+      @configurationGenerator.configure {flowData, @flowToken}, (error, config, stopConfig) =>
         return callback error if error?
 
         @clearAndSaveConfig {config, stopConfig}, (error) =>
@@ -48,7 +49,7 @@ class IotAppPublisher
 
   getFlowDevice: (callback) =>
 
-    query = uuid: @appId
+    query = uuid: @flowId
 
     projection = uuid: true, draft: true
 
