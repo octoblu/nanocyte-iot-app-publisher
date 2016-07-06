@@ -10,6 +10,7 @@ describe 'IotAppPublisher', ->
       options =
         appId: 'the-bluprint-uuid'
         flowId: 'the-flow-uuid'
+        flowToken: 'the-flow-token'
         appToken: 'the-bluprint-token'
         version: 'some-version'
         client: @client
@@ -51,7 +52,7 @@ describe 'IotAppPublisher', ->
       it 'should call configuration generator with the flow', ->
         expect(@configurationGenerator.configure).to.have.been.calledWith
           flowData: { a: 1, b: 5 }
-          appToken: 'the-bluprint-token'
+          flowToken: 'the-flow-token'
 
       it 'should call configuration saver with the flow', ->
         expect(@configurationSaver.saveIotApp).to.have.been.calledWith(
