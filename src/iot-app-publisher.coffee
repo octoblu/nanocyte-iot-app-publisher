@@ -7,8 +7,9 @@ class IotAppPublisher
   constructor: (options, dependencies={}) ->
     {
       @appId
-      @flowId
       @appToken
+      @flowId
+      @flowToken
       @version
       meshbluConfig
     } = options
@@ -27,18 +28,12 @@ class IotAppPublisher
     @getFlowDevice (error, flowDevice) =>
       return callback error if error?
       flowData = flowDevice.draft
-      @configurationGenerator.configure {flowData, @appToken}, (error, config, stopConfig) =>
+      @configurationGenerator.configure {flowData, @flowToken}, (error, config, stopConfig) =>
         debug("Error generating config for flow", error) if error?
         return callback error if error?
+        @clearAndSaveConfig {config, stopConfig}, callback
 
-        @clearAndSaveConfig {config, stopConfig}, (error) =>
-          debug("Error clearAndSaveConfig", error) if error?
-          return callback error if error?
 
-          @setupDevice {flowData, config}, (error) =>
-            debug("Error @setupDevice", error) if error?
-            return callback error if error?
-            callback()
 
   clearAndSaveConfig: (options, callback) =>
     {config, stopConfig} = options

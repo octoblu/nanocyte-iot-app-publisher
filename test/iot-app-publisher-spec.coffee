@@ -103,14 +103,3 @@ describe 'IotAppPublisher', ->
 
       it 'should not give us a result', ->
         expect(@result).to.not.exist
-
-    describe 'when publish is called and the generator and saver actually worked', ->
-      beforeEach (done) ->
-        @configurationGenerator.configure.yields null, { erik_likes_me: 'more than you know'}
-        @configurationSaver.saveIotApp.yields null, {finally_i_am_happy: true}
-        @sut.setupDevice = sinon.stub().yields null
-
-        @sut.publish  (@error, @result) => done()
-
-      it 'should call setupDeviceForwarding', ->
-        expect(@sut.setupDevice).to.have.been.called
