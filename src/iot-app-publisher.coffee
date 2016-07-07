@@ -26,10 +26,13 @@ class IotAppPublisher
 
   publish: (callback=->) =>
     @getFlowDevice (error, flowDevice) =>
+      debug("Error getting flowDevice", error) if error?
       return callback error if error?
       flowData = flowDevice.draft
       @configurationGenerator.configure {flowData, @flowToken}, (error, config, stopConfig) =>
         debug("Error generating config for flow", error) if error?
+        debug("config", config)
+        debug("stopConfig", stopConfig)
         return callback error if error?
         @clearAndSaveConfig {config, stopConfig}, callback
 
