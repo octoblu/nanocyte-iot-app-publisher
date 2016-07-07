@@ -9,7 +9,6 @@ class IotAppPublisher
       @appId
       @appToken
       @flowId
-      @flowToken
       @version
       meshbluConfig
     } = options
@@ -29,7 +28,7 @@ class IotAppPublisher
       debug("Error getting flowDevice", error) if error?
       return callback error if error?
       flowData = flowDevice.draft
-      @configurationGenerator.configure {flowData, @flowToken}, (error, config, stopConfig) =>
+      @configurationGenerator.configure {flowData, flowToken: 'a-fake-token-because-this-is-an-iot-app'}, (error, config, stopConfig) =>
         debug("Error generating config for flow", error) if error?
         debug("config", config)
         debug("stopConfig", stopConfig)
