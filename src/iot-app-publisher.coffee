@@ -45,7 +45,7 @@ class IotAppPublisher
       version: @version
       flowData: config
 
-    @configurationSaver.saveIotApp saveOptions, callback
+    @configurationSaver.save saveOptions, callback
 
   getFlowDevice: (callback) =>
 

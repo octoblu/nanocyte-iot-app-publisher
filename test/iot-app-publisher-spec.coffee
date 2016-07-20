@@ -18,7 +18,7 @@ describe 'IotAppPublisher', ->
         configure: sinon.stub()
 
       @configurationSaver =
-        saveIotApp: sinon.stub()
+        save: sinon.stub()
 
       @meshbluHttp =
         message:            sinon.stub()
@@ -44,7 +44,7 @@ describe 'IotAppPublisher', ->
               'broadcast.sent': ['subscribe-to-this-uuid']
 
         @configurationGenerator.configure.yields null, flowConfig, {stop: 'config'}
-        @configurationSaver.saveIotApp.yields null
+        @configurationSaver.save.yields null
         @meshbluHttp.updateDangerously.yields null
         @sut.publish => done()
 
@@ -54,7 +54,7 @@ describe 'IotAppPublisher', ->
           flowToken: 'a-fake-token-because-this-is-an-iot-app'
 
       it 'should call configuration saver with the flow', ->
-        expect(@configurationSaver.saveIotApp).to.have.been.calledWith(
+        expect(@configurationSaver.save).to.have.been.calledWith(
           appId: 'the-bluprint-uuid'
           version: 'some-version'
           flowData:
@@ -95,7 +95,7 @@ describe 'IotAppPublisher', ->
     describe 'when publish is called and the configuration save returns an error', ->
       beforeEach (done)->
         @configurationGenerator.configure.yields null, { erik_likes_me: true}
-        @configurationSaver.saveIotApp.yields new Error 'Erik can never like me enough'
+        @configurationSaver.save.yields new Error 'Erik can never like me enough'
         @sut.publish  (@error, @result)=> done()
 
       it 'should yield and error', ->
