@@ -2,7 +2,7 @@ _             = require 'lodash'
 debug         = require('debug')('nanocyte-iot-app-publisher')
 MeshbluHttp   = require 'meshblu-http'
 MeshbluConfig = require 'meshblu-config'
-
+debug = require ('debug')('iot-app-publisher')
 class IotAppPublisher
   constructor: (options, dependencies={}) ->
     {
