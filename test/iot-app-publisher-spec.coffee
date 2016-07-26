@@ -19,6 +19,7 @@ describe 'IotAppPublisher', ->
 
       @configurationSaver =
         save: sinon.stub()
+        clear: sinon.stub()
 
       @meshbluHttp =
         message:            sinon.stub()
@@ -44,6 +45,7 @@ describe 'IotAppPublisher', ->
               'broadcast.sent': ['subscribe-to-this-uuid']
 
         @configurationGenerator.configure.yields null, flowConfig, {stop: 'config'}
+        @configurationSaver.clear.yields null
         @configurationSaver.save.yields null
         @meshbluHttp.updateDangerously.yields null
         @sut.publish => done()
@@ -52,6 +54,9 @@ describe 'IotAppPublisher', ->
         expect(@configurationGenerator.configure).to.have.been.calledWith
           flowData: { a: 1, b: 5 }
           flowToken: 'a-fake-token-because-this-is-an-iot-app'
+
+      it 'should call clear on the configuration', ->
+        expect(@configurationSaver.clear).to.have.been.calledWith appId: 'the-bluprint-uuid'
 
       it 'should call configuration saver with the flow', ->
         expect(@configurationSaver.save).to.have.been.calledWith(
@@ -70,6 +75,7 @@ describe 'IotAppPublisher', ->
     describe 'when publish is called and flow get errored', ->
       beforeEach (done) ->
         @meshbluHttp.search.yields new Error 'whoa, shoots bad', null
+        @configurationSaver.clear.yields null
         @sut.publish  (@error, @result) => done()
 
       it 'should call meshbluHttp.search', ->
@@ -84,6 +90,7 @@ describe 'IotAppPublisher', ->
     describe 'when publish is called and the configuration generator returns an error', ->
       beforeEach (done)->
         @configurationGenerator.configure.yields new Error 'Oh noes'
+        @configurationSaver.clear.yields null
         @sut.publish  (@error, @result)=> done()
 
       it 'should return an error with an error', ->
@@ -96,6 +103,7 @@ describe 'IotAppPublisher', ->
       beforeEach (done)->
         @configurationGenerator.configure.yields null, { erik_likes_me: true}
         @configurationSaver.save.yields new Error 'Erik can never like me enough'
+        @configurationSaver.clear.yields null
         @sut.publish  (@error, @result)=> done()
 
       it 'should yield and error', ->

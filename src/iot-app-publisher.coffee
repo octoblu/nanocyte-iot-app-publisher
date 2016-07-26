@@ -39,13 +39,16 @@ class IotAppPublisher
   clearAndSaveConfig: (options, callback) =>
     {config, stopConfig} = options
 
-    saveOptions =
-      appId: @appId
-      version: @version
-      flowData: config
+    @configurationSaver.clear {@appId}, (error) =>
+      return callback error if error?
 
-    debug 'clearAndSaveConfig', {@appId, @version}
-    @configurationSaver.save saveOptions, callback
+      saveOptions =
+        appId: @appId
+        version: @version
+        flowData: config
+
+      debug 'clearAndSaveConfig', {@appId, @version}
+      @configurationSaver.save saveOptions, callback
 
   getFlowDevice: (callback) =>
 
